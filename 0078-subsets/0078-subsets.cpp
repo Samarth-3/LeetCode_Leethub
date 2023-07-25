@@ -12,7 +12,7 @@ private:
         int element=nums[index];
         output.push_back(element);
         functionCall(nums,output,index+1,ans);
-        output.pop_back();
+        output.pop_back(); //Backtrack to remove the element and explore other possibilities
     }
 public:
     vector<vector<int>> subsets(vector<int>& nums) {
