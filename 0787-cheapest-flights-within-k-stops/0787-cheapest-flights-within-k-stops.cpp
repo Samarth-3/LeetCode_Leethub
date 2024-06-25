@@ -18,7 +18,7 @@ public:
             int node=q.front().second.first;
             int cost=q.front().second.second;
             q.pop();
-             if (stops > k) continue;
+             // if (stops > k) continue;
             for(auto it:adj[node]){
                 int nn=it.first;
                 int dd=it.second;
