@@ -12,24 +12,30 @@
 class Solution {
 public:
     vector<int> inorderTraversal(TreeNode* root) {
+        //moris traversal
+        //threading
         vector<int> ans;
-        stack<TreeNode*> s;
-        TreeNode* current = root;
-
-        while (true) {
-            if (current != NULL) {
-                s.push(current);
-                current = current->left;
+        TreeNode* curr=root;
+        while(curr!=NULL){
+            if(curr->left==NULL){
+                ans.push_back(curr->val);
+                curr=curr->right;
             }
-            else{
-                if(s.empty()){
-                    break;
+            else{ //when left is not null move to rightmost part of left
+                TreeNode* temp=curr->left;
+                while(temp->right!=NULL && temp->right!=curr){
+                    temp=temp->right;
                 }
-                current = s.top();
-                s.pop();
-                ans.push_back(current->val);
-                current = current->right;
-            } 
+                if(temp->right==NULL){
+                    temp->right=curr;
+                    curr=curr->left;
+                }
+                else{ //case when temp->right pointing towards curr (thread)
+                    temp->right=NULL;
+                    ans.push_back(curr->val);
+                    curr=curr->right;
+                }
+            }
         }
         return ans;
     }
