@@ -9,6 +9,8 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+
+/*
 class Solution {
 public:
     vector<int> preorderTraversal(TreeNode* root) {
@@ -28,4 +30,37 @@ public:
        return ans; 
     }
     
+};
+*/
+
+class Solution {
+public:
+    vector<int> preorderTraversal(TreeNode* root) {
+        //moris traversal
+        //threading
+        vector<int> ans;
+        TreeNode* curr=root;
+        while(curr!=NULL){
+            if(curr->left==NULL){
+                ans.push_back(curr->val);
+                curr=curr->right;
+            }
+            else{ //when left is not null move to rightmost part of left
+                TreeNode* temp=curr->left;
+                while(temp->right!=NULL && temp->right!=curr){
+                    temp=temp->right;
+                }
+                if(temp->right==NULL){
+                    temp->right=curr;
+                    ans.push_back(curr->val);
+                    curr=curr->left;
+                }
+                else{ //case when temp->right pointing towards curr (thread)
+                    temp->right=NULL;
+                    curr=curr->right;
+                }
+            }
+        }
+        return ans;
+    }
 };
