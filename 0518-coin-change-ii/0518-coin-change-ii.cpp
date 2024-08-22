@@ -4,14 +4,17 @@ public:
         if(amount==0){
             return 1;
         }
-        if(amount<0 || index<0){
-            return 0;
-        }
         if(dp[index][amount]!=-1){
             return dp[index][amount];
         }
-        int notake=fun(index-1,amount,coins,dp);
-        int take=fun(index,amount-coins[index],coins,dp);
+        int notake=0;
+        if(index-1>=0){
+            notake=fun(index-1,amount,coins,dp);
+        }
+        int take=0;
+        if(coins[index]<=amount){
+            take=fun(index,amount-coins[index],coins,dp);
+        }
         
         return dp[index][amount]=take+notake;
     }
