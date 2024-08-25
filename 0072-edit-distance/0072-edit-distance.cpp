@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int fun(string word1, string word2,int i,int j,vector<vector<int>> &dp){
+    int fun(string &word1, string &word2,int i,int j,vector<vector<int>> &dp){
         if(i<0){
             return j+1;
         }
