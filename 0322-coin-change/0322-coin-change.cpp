@@ -6,7 +6,7 @@ public:
         }
         if(index < 0 || amount < 0) return 1e9; 
         if (dp[index][amount] != -1) return dp[index][amount];
-        int notake=0+fun(index-1,amount,coins,dp);
+        int notake=fun(index-1,amount,coins,dp);
         int take = 1e9;
         if(amount >= coins[index]) {
             take = 1 + fun(index, amount - coins[index], coins,dp);
